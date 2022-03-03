@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/WorkWithBluetooth/app/src/main/res/layout/activity_control.xml" value="0.25416666666666665" />
         <entry key="..\:/WorkWithBluetooth/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/WorkWithBluetooth/app/src/main/res/layout/item.xml" value="0.264" />
+        <entry key="..\:/WorkWithBluetooth/app/src/main/res/menu/control_menu.xml" value="0.264" />
       </map>
     </option>
   </component>

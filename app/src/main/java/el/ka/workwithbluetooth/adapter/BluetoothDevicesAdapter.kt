@@ -1,12 +1,16 @@
-package el.ka.workwithbluetooth
+package el.ka.workwithbluetooth.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import el.ka.workwithbluetooth.R
+import el.ka.workwithbluetooth.model.BluetoothDevice
 import kotlinx.android.synthetic.main.item.view.*
 
-class BluetoothDevicesAdapter : RecyclerView.Adapter<BluetoothDevicesAdapter.ViewHolder>() {
+class BluetoothDevicesAdapter(
+    private val listener: Listener
+) : RecyclerView.Adapter<BluetoothDevicesAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     private val devices = mutableListOf<BluetoothDevice>()
@@ -17,8 +21,8 @@ class BluetoothDevicesAdapter : RecyclerView.Adapter<BluetoothDevicesAdapter.Vie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.item_device_name.text  = devices[position].name
-        holder.itemView.item_device_mac_address.text  = devices[position].mac
+        holder.itemView.item_device_name.text = devices[position].name
+        holder.itemView.item_device_mac_address.text = devices[position].mac
     }
 
     override fun getItemCount() = devices.size
@@ -32,5 +36,20 @@ class BluetoothDevicesAdapter : RecyclerView.Adapter<BluetoothDevicesAdapter.Vie
     fun addDevice(device: BluetoothDevice) {
         devices.add(device)
         notifyItemInserted(devices.size)
+    }
+
+    override fun onViewAttachedToWindow(holder: ViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        holder.itemView.setOnClickListener { listener.OnClick(devices[holder.adapterPosition]) }
+    }
+
+    override fun onViewDetachedFromWindow(holder: ViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        holder.itemView.setOnClickListener(null)
+    }
+
+
+    interface Listener {
+        fun OnClick(item: BluetoothDevice)
     }
 }
